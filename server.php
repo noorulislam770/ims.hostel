@@ -77,7 +77,7 @@ if (isset($_GET['add-student'])){
 
   if(!(empty($id) && empty($name) && empty($room) && empty($city) && empty($batch) && empty($hostel) )){
     $sql = "INSERT INTO student (id,name,roomId,city,batch,hostel) VALUES ($id,'$name',$room,'$city',$batch,$hostel)";
-    echo $sql;
+    // echo $sql;
     if ($conn->query($sql) === TRUE){
       echo successMessage("Student");
 

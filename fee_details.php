@@ -24,27 +24,30 @@
         </nav>
 <? include ("headers/navbar.php"); ?>
     <section class="add-student">
-        <h1 class="title">Students details search page  </h1>
+        <h1 class="title">Fee Details Search Page  </h1>
 
         <div class="container">
-            <form action="show_students_details.php" method="get">
-
-                <div class="info-form row">
-                    <div class="form-field col-lg-6">
-                        <input type="number" class="input-text" id="id" name = "id"  >
-                    <label for="id" class="label">Enter Student Id</label>  
+            <form action="show_fee_details.php" method="get">
+                <div class="form-check form-field">
+                    <input class="form-check-input" type="radio" name="selection" required value= "paid" id="selection" >
+                    <label class="form-check-label" for="selection">
+                Fee Paid
+                    </label>
                 </div>
-                <h2 style="padding: 10px 0 0 20 ;">OR</h2>
-                <div class="info-form row">
-                    <div class="form-field col-lg-6">
-                        <input type="text" class="input-text" id="name" name = "name" >
-                    <label for="name" class="label">Enter Student Name</label>  
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="selection" required value= "unpaid"  id="selection1" >
+                    <label class="form-check-label" for="selection1">
+                Fee unPaid
+                    </label>
                 </div>
+                <br>
+                    <input style ="top: 10px" type="submit" name="show-details" class="submit-btn btn-lg btn-primary"> 
                 
                 <div class="form-field col-lg-6">
-                    
-                    <input type="submit" name="show-details" class="submit-btn btn-lg btn-primary"> 
+                    <br>
+                    <h1>OR</h1>
                 </div>
+                    <a style ="top: 30px;" class="btn btn-primary" href="student_details.php">Search student Details</a>
                 
                
             </form>

@@ -1,4 +1,23 @@
+<?
+$servername = "localhost";
+$username = "root";
+$password = "";
+$db = "hostel"; 
+
+// Create connection
+global $conn ;
+$conn = new mysqli($servername, $username, $password,$db);
+
+// Check connection
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+// echo "<p>Connected successfully</p>";
+
+?>
 <!DOCTYPE html>
+
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -31,29 +50,71 @@
 
                 <div class="info-form row">
                     <div class="form-field col-lg-6">
-                        <input type="number" class="input-text" id="id" name = "id">
+                        <input type="number" class="input-text" id="id" name = "id" required>
                     <label for="id" class="label">Student ID. No</label>  
                 </div>
                 <div class="form-field col-lg-6">
-                    <input type="text" class="input-text" id="name" name = "name">
+                    <input type="text" class="input-text" id="name" name = "name" required>
                     <label for="name" class="label">Name</label>  
                 </div>
                 <div class="form-field col-lg-6">
-                    <input type="number" class="input-text" id="room" name = "room">
-                    <label for="room" class="label">Room No</label>  
+                    
+
+                    <!-- <label for="hostel" class="label">Hostel</label>   -->
+                    <select name="hostel" class="form-select" id="cars">
+
+                    <?php 
+                    
+                    $sql = "SELECT DISTINCT hostel FROM student";
+                    $result = $conn->query($sql);
+                    echo $sql;
+                    if ($result->num_rows > 0 ){
+                        while ($row = mysqli_fetch_array($result)){
+                            $name = $row["hostel"];
+                            echo "inside the fucntion";
+                            $html = '<option value="'.$name .'">'. $name .'</option>';
+                            echo $html;
+                        }
+                    }
+
+                    ?>
+                    
+                    </select>
+                    <label for="hostel"> Hostel</label>
                 </div>
                 
                 <div class="form-field col-lg-6">
-                    <input type="number" class="input-text" id="hostel" name = "hostel">
-                    <label for="hostel" class="label">Hostel No</label>  
+                    
+
+                    <!-- <label for="hostel" class="label">Hostel</label>   -->
+                    <select name="hostel" class="form-select" id="cars">
+
+                    <?php 
+                    
+                    $sql = "SELECT DISTINCT hostel FROM student";
+                    $result = $conn->query($sql);
+                    echo $sql;
+                    if ($result->num_rows > 0 ){
+                        while ($row = mysqli_fetch_array($result)){
+                            $name = $row["hostel"];
+                            echo "inside the fucntion";
+                            $html = '<option value="'.$name .'">'. $name .'</option>';
+                            echo $html;
+                        }
+                    }
+
+                    ?>
+                    
+                    </select>
+                    <label for="hostel"> Hostel</label>
                 </div>
 
                 <div class="form-field col-lg-6">
-                    <input type="text" class="input-text" id="city" name = "city">
+                    <input type="text" class="input-text" id="city" name = "city" required>
                     <label for="city" class="label">City</label>  
                 </div>
                 <div class="form-field col-lg-6">
-                    <input type="number" class="input-text" id="batch" name = "batch">
+                    <input type="number" class="input-text" id="batch" name = "batch" required>
                     <label for="batch" class="label">Batch</label>  
                 </div>
                 <div class="form-field col-lg-6">
@@ -66,8 +127,10 @@
 
     </section>
     <script src="js/bootstrap.bundle.min.js"></script>
+    
     <script >
 
+    
 
     </script>
 </body>

@@ -31,7 +31,7 @@
 
                 <div class="info-form row">
                     <div class="form-field col-lg-6">
-                        <input type="number" class="input-text" id="id" name = "id">
+                        <input type="number" class="input-text" id="id" name = "id" required>
                     <label for="id" class="label">Enter Studen Id</label>  
                 </div>
                 

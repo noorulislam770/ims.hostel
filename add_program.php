@@ -31,11 +31,11 @@
 
                 <div class="info-form row">
                     <div class="form-field col-lg-6">
-                        <input type="number" class="input-text" id="id" name = "id">
+                        <input type="number" class="input-text" id="id" name = "id" required>
                     <label for="id" class="label">Program Id No</label>  
                 </div>
                 <div class="form-field col-lg-6">
-                    <input type="text" class="input-text" id="name" name = "name">
+                    <input type="text" class="input-text" id="name" name = "name" required>
                     <label for="name" class="label">Program NAme</label>  
                 </div>
                 

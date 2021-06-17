@@ -29,10 +29,9 @@
             </div>
         </nav>
 
-        <h1 class="h1 center" style="width: 100%; text-align:center;padding-top:10px; ">Room Details</h1>
+        <h1 class="h1 center" style="width: 100%; text-align:center;padding-top:10px; ">Fee  Details</h1>
         
-
-<?php
+<?php 
 
 $servername = "localhost";
 $username = "root";
@@ -48,51 +47,6 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 // echo "Connected successfully";
-
-
-
-
-function roomDetails($id,$size,$floor,$hostel){
-    $slots = 5;
-    
-    return '
-    <section class="add-student">
-    <h1 class="title">Enter Room Info </h1>
-
-    <div class="container">
-        <form >
-
-            <div class="info-form row">
-                <div class="form-field col-lg-6">
-                    <input type="number" class="input-text" readonly value= '. $id.'  id="roomNo" name = "roomNo">
-                <label for="roomNo" class="label">Room No</label>  
-            </div>
-            <div class="form-field col-lg-6">
-                <input type="number" class="input-text" readonly value= '. $size.'  id="size" name = "size">
-                <label for="size" class="label">Size</label>  
-            </div>
-            <div class="form-field col-lg-6">
-                <input type="number" class="input-text" readonly value= '. $floor.'  id="floor" name = "floor">
-                <label for="floor" class="label">floor</label>  
-            </div>
-            
-            
-            <div class="form-field col-lg-6">
-                <input type="number" class="input-text"  readonly value= '. $hostel.' id="hostel" name = "hostel">
-                <label for="hostel" class="label">Hostel</label>  
-            </div>
-            
-            <div class="form-field col-lg-6">
-                <input type="number" class="input-text" readonly value= '. $slots.'  id="slots" name = "slots">
-                <label for="slots" class="label">Slots Remaing</label>  
-            </div>
-           
-        </form>
-    </div>
-
-</section>
-    ';
-}
 
 function renderTable($rows){
     
@@ -133,40 +87,28 @@ function renderTable($rows){
     return $text;
 }
 
-if (isset($_GET['show-details'])){
-    $roomNo = $_GET['roomNo'];
-    $hostel = $_GET['hostel'];
-    
-    if (! (empty($roomNo) && empty($hostel))){
-        $sql = "SELECT * FROM room WHERE roomNo = $roomNo AND  hostel = $hostel";
-    //   echo $sql;
-        $result = $conn->query($sql);
 
-        if ($result->num_rows > 0 ){
-            $row = $result->fetch_assoc();
-            echo roomDetails($row["roomNo"],$row["size"],$row["floor"],$row["hostel"]);
 
-            $students_sql = "SELECT * FROM student WHERE roomId = $roomNo AND hostel=$hostel";
-            $students_result = mysqli_query($conn,$students_sql);
-            echo renderTable($students_result);
-            // if ($students_result->num_rows > 0){
-                // $student_rows = $students_result->fetch_assoc();
-                // echo $student_rows;
-            // }    
-        }
-        else{
-            echo '<div class="alert alert-danger" role="alert">
-            Recod not found
-          </div>';
-        }
-        
-
-      }
+if (isset($_GET["show-details"])){
+    $value = $_GET['selection'];
+    $bin_paid = 0;
+    if ($value == "paid"){
+        $bin_paid = 1;
+    }else{
+        $bin_paid = 0;
     }
 
+    $sql = "SELECT * FROM student WHERE fee = $bin_paid";
+    $result = $conn->query($sql);
+    if($result->num_rows > 0){
+        echo renderTable($result);
+    }
+    else{
+        echo '<div class="alert alert-danger" role="alert">
+        Recod not found
+      </div>';
+    }
+
+}
 
 ?>
-            </tbody>
-        </table>
-    </body>
-</html>

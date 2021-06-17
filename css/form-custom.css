@@ -26,7 +26,7 @@
 
 }
 
-.info-form .input-text{
+.info-form .input-text ,select,option{
     display: block;
     width: 100%;
     height: 36px;

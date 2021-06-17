@@ -113,9 +113,9 @@ if (isset($_GET['show-details'])){
     $id = $_GET['id'];
     $name = $_GET['name'];
     
-    if (! (empty($id))){
+    if ($id != ""){
       $sql = "SELECT * FROM student WHERE $id = id";
-      // echo $sql;
+    //   echo $sql;
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0 ){
@@ -124,8 +124,28 @@ if (isset($_GET['show-details'])){
 
         }
 
-      }
+        else{
+            echo '<div class="alert alert-danger" role="alert">
+            Recod not found
+          </div>';
+        }
+
     }
+    else if($name != ""){
+        
+        $sql = "SELECT * FROM student WHERE name = '$name'";
+        $result = $conn->query($sql);
+        // echo "inside name ";
+        // echo $sql;
+            if ($result->num_rows > 0 ){
+                $row = $result->fetch_assoc();
+                echo showResponse($row['id'],$row['name'],$row['roomId'],$row['hostel'],$row['batch'],$row['fee'],$row['city'],);
+    
+            }
+        
+    }    
+}
+    
 
 
 ?>

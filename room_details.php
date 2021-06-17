@@ -30,13 +30,13 @@
 
                 <div class="info-form row">
                     <div class="form-field col-lg-6">
-                        <input type="number" class="input-text" id="roomNo" name = "roomNo">
+                        <input type="number" class="input-text" id="roomNo" name = "roomNo" required>
                     <label for="roomNo" class="label">Enter Room No</label>  
                 </div>
                 
                 <div class="info-form row">
                     <div class="form-field col-lg-6">
-                        <input type="number" class="input-text" id="hostel" name = "hostel">
+                        <input type="number" class="input-text" id="hostel" name = "hostel" required>
                     <label for="hostel" class="label">Enter Hostel No </label>
                 </div>
                 
