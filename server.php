@@ -33,7 +33,7 @@ function successMessage($task){
   <h4 class="alert-heading">'.$task.' Successfully!</h4>
   <p>Student Added, Now you will be forwarded to the main page in 10 seconds.</p>
   <hr>
-  <p class="mb-0">click here to go directly <a href="index.php"> <button type="button" class="btn btn-primary btn-lg">Home Page</button> <a> </p>
+  <p class="mb-0">click here to go directly <a href="index.php"> <button type="button" class="btn btn-primary btn-lg">Home Page </button> <a> </p>
 </div>';
 }
 
