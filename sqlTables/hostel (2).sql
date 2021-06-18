@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 15, 2021 at 10:52 PM
+-- Generation Time: Jun 18, 2021 at 09:16 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.7
 
@@ -58,6 +58,7 @@ CREATE TABLE `program` (
 INSERT INTO `program` (`id`, `name`) VALUES
 (1, 'BSSE'),
 (2, 'BBA'),
+(23, 'MS Chemical Engineering'),
 (1231, 'BS AeroSpace Engineering'),
 (234234, 'bs social sciences');
 
@@ -71,17 +72,18 @@ CREATE TABLE `room` (
   `roomNo` int(11) NOT NULL,
   `size` int(11) NOT NULL,
   `floor` int(11) NOT NULL,
-  `hostel` int(11) NOT NULL
+  `hostel` int(11) NOT NULL,
+  `slots_rem` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `room`
 --
 
-INSERT INTO `room` (`roomNo`, `size`, `floor`, `hostel`) VALUES
-(1, 4, 2, 1),
-(2, 2, 0, 3),
-(23, 5, 2, 2);
+INSERT INTO `room` (`roomNo`, `size`, `floor`, `hostel`, `slots_rem`) VALUES
+(1, 4, 2, 1, 1),
+(2, 2, 0, 3, 3),
+(23, 5, 2, 2, 4);
 
 -- --------------------------------------------------------
 
@@ -105,18 +107,20 @@ CREATE TABLE `student` (
 
 INSERT INTO `student` (`id`, `name`, `roomId`, `city`, `fee`, `batch`, `hostel`) VALUES
 (232, 'ali', 2, 'Peshawar', 0, 2312, 3),
-(4443, 'faizan', 2342, 'Peshawar', 1, 2021, 1),
+(4443, 'faizan', 23, 'Peshawar', 1, 2021, 1),
 (23422, 'jhon wick', 23, 'lahore', 0, 2323, 1),
 (23424, 'faizan', 23, 'Peshawar', 0, 82932, 2),
 (89892, 'rehman', 23, 'karachi', 0, 2321, 3),
 (234234, 'sameer', 28, 'peshawar', 0, 2341, 2),
 (293420, 'fayaz', 9, 'islamabad', 0, 2099, 1),
 (909099, 'Fareed', 9, 'karachi', 0, 2012, 2),
-(2342342, 'aliyan', 3, 'noshera', 23, 2019, 3),
+(998899, 'jhon Cena', 1, 'Peshawar', 0, 2019, 1),
+(2342342, 'aliyan', 3, 'noshera', 1, 2019, 3),
 (2934202, 'changez', 23, 'Peshawar', 0, 2300, 1),
 (12342903, 'sammer', 2, 'Peshawar', 0, 2019, 1),
 (23411231, 'owais', 1, 'dir', 0, 2342, 1),
 (29342023, 'waseem', 900, 'kohat', 0, 2323, 2),
+(99009900, 'fakher', 1, 'Peshawar', 0, 2019, 1),
 (193201247, 'noor', 8, 'chitral', 1, 2012, 3);
 
 --
