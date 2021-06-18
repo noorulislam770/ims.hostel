@@ -1,20 +1,4 @@
-<?
-$servername = "localhost";
-$username = "root";
-$password = "";
-$db = "hostel"; 
 
-// Create connection
-global $conn ;
-$conn = new mysqli($servername, $username, $password,$db);
-
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
-// echo "<p>Connected successfully</p>";
-
-?>
 <!DOCTYPE html>
 
 
@@ -61,16 +45,32 @@ if ($conn->connect_error) {
                     
 
                     <!-- <label for="hostel" class="label">Hostel</label>   -->
-                    <select name="hostel" class="form-select" id="cars">
+                    <select name="room" class="form-select" id="cars">
 
                     <?php 
                     
-                    $sql = "SELECT DISTINCT hostel FROM student";
+                        $servername = "localhost";
+                        $username = "root";
+                        $password = "";
+                        $db = "hostel"; 
+
+                        // Create connection
+                        global $conn ;
+                        $conn = new mysqli($servername, $username, $password,$db);
+
+                        // Check connection
+                        if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                        }
+                        // echo "<p>Connected successfully</p>";
+
+
+                    $sql = "SELECT roomNo FROM room WHERE  slots_rem > 0";
                     $result = $conn->query($sql);
-                    echo $sql;
+                    // echo $sql;
                     if ($result->num_rows > 0 ){
                         while ($row = mysqli_fetch_array($result)){
-                            $name = $row["hostel"];
+                            $name = $row["roomNo"];
                             echo "inside the fucntion";
                             $html = '<option value="'.$name .'">'. $name .'</option>';
                             echo $html;
@@ -80,7 +80,7 @@ if ($conn->connect_error) {
                     ?>
                     
                     </select>
-                    <label for="hostel"> Hostel</label>
+                    <label for="hostel"> Room</label>
                 </div>
                 
                 <div class="form-field col-lg-6">

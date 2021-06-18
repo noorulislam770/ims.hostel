@@ -64,7 +64,7 @@ function renderTable($rows){
     </thead>
     <tbody>' ;
     
-    while ($row = mysqli_fetch_array($rows)){
+    while ($row = mysqli_fetch_array($rows) ){
         $fee_cleared = "";
         if ($row["fee"] == 1){
             $fee_cleared = "Cleared!";

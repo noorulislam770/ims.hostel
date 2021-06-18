@@ -108,6 +108,15 @@ function showResponse($id,$name,$room,$hostel,$batch,$fee,$city){
     ';
 }
 
+function errorMessage($place){
+    echo '<div class="alert alert-danger" role="alert">
+    <h4 class="alert-heading">'.$place.'!</h4>
+    <p>Please go back and re enter a valid name or id.</p>
+    <hr>
+    <p class="mb-0">click here to go directly <a href="student_details.php"> <button type="button" class="btn btn-warning btn-lg">Retry</button> <a> </p>
+  </div>';
+  }
+  
 
 if (isset($_GET['show-details'])){
     $id = $_GET['id'];
@@ -125,9 +134,8 @@ if (isset($_GET['show-details'])){
         }
 
         else{
-            echo '<div class="alert alert-danger" role="alert">
-            Recod not found
-          </div>';
+            errorMessage("Student with id doesnt exit");
+            header("Refresh: 3; Location: student_details.php");
         }
 
     }
@@ -142,8 +150,17 @@ if (isset($_GET['show-details'])){
                 echo showResponse($row['id'],$row['name'],$row['roomId'],$row['hostel'],$row['batch'],$row['fee'],$row['city'],);
     
             }
+            else{
+                // echo "<p> hkjsdhfjhe </>"; 
+                errorMessage("Student Doesnt Exists");
+                header('Refresh: 3; URL=student_details.php');
+            }
         
     }    
+    else{
+        errorMessage("Please Enter One Value or Another");
+        header('Refresh: 3; URL=student_details.php');
+    }
 }
     
 

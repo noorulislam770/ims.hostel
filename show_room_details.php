@@ -52,8 +52,8 @@ if ($conn->connect_error) {
 
 
 
-function roomDetails($id,$size,$floor,$hostel){
-    $slots = 5;
+function roomDetails($id,$size,$floor,$hostel,$slots){
+    
     
     return '
     <section class="add-student">
@@ -144,7 +144,7 @@ if (isset($_GET['show-details'])){
 
         if ($result->num_rows > 0 ){
             $row = $result->fetch_assoc();
-            echo roomDetails($row["roomNo"],$row["size"],$row["floor"],$row["hostel"]);
+            echo roomDetails($row["roomNo"],$row["size"],$row["floor"],$row["hostel"],$row["slots_rem"]);
 
             $students_sql = "SELECT * FROM student WHERE roomId = $roomNo AND hostel=$hostel";
             $students_result = mysqli_query($conn,$students_sql);
@@ -156,7 +156,7 @@ if (isset($_GET['show-details'])){
         }
         else{
             echo '<div class="alert alert-danger" role="alert">
-            Recod not found
+            Record not found
           </div>';
         }
         

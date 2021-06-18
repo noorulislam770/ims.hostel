@@ -30,10 +30,10 @@ if ($conn->connect_error) {
 
 function successMessage($task){
   return '<div class="alert alert-success" role="alert">
-  <h4 class="alert-heading">'.$task.' Added Successfully!</h4>
+  <h4 class="alert-heading">'.$task.' Successfully!</h4>
   <p>Student Added, Now you will be forwarded to the main page in 10 seconds.</p>
   <hr>
-  <p class="mb-0">click here to go directly <a href="index.php"> <button type="button" class="btn btn-primary btn-lg">Large button</button> <a> </p>
+  <p class="mb-0">click here to go directly <a href="index.php"> <button type="button" class="btn btn-primary btn-lg">Home Page</button> <a> </p>
 </div>';
 }
 
@@ -60,6 +60,18 @@ function validateUser($username, $password){
   }
 }
 
+
+function errorMessage($place){
+  echo '<div class="alert alert-danger" role="alert">
+  <h4 class="alert-heading">'.$place.'!</h4>
+  <p>Please go back and re enter a valid name or id.</p>
+  <hr>
+  <p class="mb-0">click here to go directly <a href="fee_reception.php"> <button type="button" class="btn btn-warning btn-lg">Retry</button> <a> </p>
+</div>';
+}
+
+
+
 //for login 
 
 if (isset($_POST['login'])){
@@ -80,7 +92,8 @@ if (isset($_GET['add-student'])){
     // echo $sql;
     if ($conn->query($sql) === TRUE){
       echo successMessage("Student");
-
+      $updateRoomTable = "UPDATE room SET slots_rem = slots_rem - 1 where roomNo = $room AND hostel = $hostel";
+      $conn-> query($updateRoomTable);
     header('Refresh: 10; URL=http://localhost/app/index.php');
     }
   }
@@ -117,17 +130,70 @@ if (isset($_GET['add-program'])){
 if (isset($_GET['fee-recieved'])){
   $id = $_GET['id'];
   
+  
+  
   if (! (empty($id))){
-    $sql = "UPDATE student SET fee = 1  WHERE id = $id ";
-    // echo $sql;
-    if($conn->query($sql) === TRUE){
-      echo successMessage("Fee");
-      header ("Refresh: 10; URL=http://localhost/app/index.php");
+    $sqlCheckStudent = "SELECT * FROM student WHERE id = $id";
+    $result = $conn->query($sqlCheckStudent);
+
+    if ($result->num_rows <= 0){
+      errorMessage("Student doesnt Exists.");
+
+    }else{
+
+      
+      $sql = "UPDATE student SET fee = 1  WHERE id = $id ";
+      // echo $sql;
+      if($conn->query($sql) === TRUE){
+        echo successMessage("Fee Recieved ");
+        header ("Refresh: 10; URL=http://localhost/app/index.php");
+      }
+      else{
+        errorMessage("Student With $id Doesnt Exist ");
+        header("Refresh : 3; Location : fee_reception.php");
+      }
     }
   }
   
+  
 }
 
+
+if (isset($_GET["remove_student"])){
+
+  $id = $_GET['id'];
+  
+  if (! (empty($id))){
+    $sqlCheckStudent = "SELECT * FROM student WHERE id = $id";
+    $result = $conn->query($sqlCheckStudent);
+
+    if ($result->num_rows <= 0){
+      errorMessage("Student doesnt Exists.");
+
+    }else{
+      $room = 0;
+      while ($row = $result->fetch_assoc()){
+        $room = $row['roomId'];
+      }
+      
+      $sql = "DELETE FROM student WHERE id = $id";
+      // echo $sql;
+      
+      if($conn->query($sql) === TRUE){
+        echo successMessage("Student Removed");
+        $sqlEmptyRoom = "UPDATE room SET slots_rem = slots_rem + 1 WHERE roomNo = $room";
+        $conn->query($sqlEmptyRoom);
+        header ("Refresh: 10; URL=http://localhost/app/index.php");
+      }
+      else{
+        errorMessage("Student With $id Doesnt Exist ");
+        header("Refresh : 3; Location : fee_reception.php");
+      }
+    }
+  }
+  
+
+}
 
   
 

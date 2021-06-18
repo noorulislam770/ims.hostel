@@ -28,10 +28,46 @@
         <div class="container">
             <form action="server.php" method="get">
 
-                <div class="info-form row">
-                    <div class="form-field col-lg-6">
-                        <input type="number" class="input-text" id="roomNo" name = "roomNo" required>
-                    <label for="roomNo" class="label">Room No</label>  
+            <div class="form-field col-lg-6">
+                    
+
+                    <!-- <label for="hostel" class="label">Hostel</label>   -->
+                    <select name="room" class="form-select" id="cars">
+
+                    <?php 
+                    
+                        $servername = "localhost";
+                        $username = "root";
+                        $password = "";
+                        $db = "hostel"; 
+
+                        // Create connection
+                        global $conn ;
+                        $conn = new mysqli($servername, $username, $password,$db);
+
+                        // Check connection
+                        if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                        }
+                        // echo "<p>Connected successfully</p>";
+
+
+                    $sql = "SELECT roomNo FROM room WHERE  slots_rem > 0";
+                    $result = $conn->query($sql);
+                    // echo $sql;
+                    if ($result->num_rows > 0 ){
+                        while ($row = mysqli_fetch_array($result)){
+                            $name = $row["roomNo"];
+                            echo "inside the fucntion";
+                            $html = '<option value="'.$name .'">'. $name .'</option>';
+                            echo $html;
+                        }
+                    }
+
+                    ?>
+                    
+                    </select>
+                    <label for="hostel"> Room</label>
                 </div>
                 <div class="form-field col-lg-6">
                     <input type="number" class="input-text" id="size" name = "size" required>
